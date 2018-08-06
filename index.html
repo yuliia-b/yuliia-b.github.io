@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework for lrsson 3</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <style type="text/css">
+        .folders-wrapper {
+            display: inline-block;
+            padding: 10px;
+        }
+
+        .folder-item {
+            padding: 5px;
+            cursor: pointer;
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .folder-item__content {
+            display: flex;
+        }
+
+        .folder-item__content.show + .folder-item__subfolder {
+            display: block;
+        }
+
+        .folder__icon {
+            margin-right: 8px;
+            color: darkcyan;
+        }
+
+        .folder-item__subfolder {
+            display: none;
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .folder-item__subfolder .folder__icon {
+            color: tomato;
+        }
+
+        .folder-item--file .folder__icon {
+            color: sandybrown;
+        }
+
+        .selected {
+            background: darksalmon;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="folders-wrapper" id="folders-root">
+        <div class="folder-item">
+            <div class="folder-item__content show">
+                <div class="folder__icon folder__icon--open">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <span>Folder 1</span>
+            </div>
+            <div class="folder-item__subfolder">
+                <div class="folder-item">
+                    <div class="folder-item__content show">
+                        <div class="folder__icon folder__icon--open">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <span>Sub-folder 1-1</span>
+                    </div>
+                    <div class="folder-item__subfolder">
+                        <div class="folder-item folder-item--file">
+                            <div class="folder-item__content">
+                                <div class="folder__icon">
+                                    <i class="fas fa-file"></i>
+                                </div>
+                                <span>File 1-1-1</span>
+                            </div>
+                        </div>
+                        <div class="folder-item folder-item--file">
+                                <div class="folder-item__content">
+                                    <div class="folder__icon">
+                                        <i class="fas fa-file"></i>
+                                    </div>
+                                    <span>File 1-1-2</span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="folder-item">
+                    <div class="folder-item__content">
+                        <div class="folder__icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span>Sub-folder 1-2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 2</span>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content show">
+                <div class="folder__icon folder__icon--open">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <span>Folder 3</span>
+            </div>
+            <div class="folder-item__subfolder">
+                <div class="folder-item">
+                    <div class="folder-item__content">
+                        <div class="folder__icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span>Sub-folder 3-1</span>
+                    </div>
+                </div>
+                <div class="folder-item">
+                    <div class="folder-item__content">
+                        <div class="folder__icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span>Sub-folder 3-2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 4</span>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 3</span>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 4</span>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 5</span>
+            </div>
+        </div>
+        <div class="folder-item">
+            <div class="folder-item__content">
+                <div class="folder__icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <span>Folder 6</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    class EventFolderItems {
+        constructor(idName, className, classBtn) {
+            this.className = className;
+            this.parent = document.getElementById(idName);
+            this.folderItems = document.getElementsByClassName(this.className);
+            this.classBtn = classBtn;
+        }
+
+        selectClick() {
+            this.parent.addEventListener('click', (e) => {
+                let target = e.target;
+
+                if ( !(target.classList.contains(this.className) || target.parentElement.classList.contains(this.className)) ) {
+                    return;
+                }
+
+                if(target.parentElement.classList.contains(this.className))
+                    target = target.parentElement;
+
+                if(e.ctrlKey || e.metaKey) {
+                    this.__ctrlClick(target);
+                } else if (e.shiftKey) {
+                    this.__shiftClick(target);
+                } else {
+                    this.__mouseClick(target);
+                }
+            })
+        }
+
+        toggleFolder(elem) {
+            this.parent.addEventListener('click', (e) => {
+                let target = e.target;
+
+                if(target.parentElement.classList.contains(this.classBtn))
+                    target = target.parentElement;
+
+                if(!target.classList.contains(this.classBtn))
+                    return;
+
+                if(!target.parentElement.nextElementSibling)
+                    return;
+
+                target.classList.toggle('folder__icon--open');
+                target.children[0].classList.toggle('fa-folder-open');
+                target.children[0].classList.toggle('fa-folder');
+
+                target.parentElement.classList.toggle('show');
+            })
+        }
+
+        __shiftClick(elem) {
+            let arrLimit = [];
+            let lengthLim = 0;
+
+            elem.classList.add("selected");
+
+            let arrayFolderItems = Array.from(this.folderItems);
+
+            arrayFolderItems.forEach((item, i) => {
+                if(item.classList.contains('selected'))
+                    arrLimit.push(i);
+            });
+
+
+            lengthLim = arrLimit.length - 1;
+
+            for (let i = arrLimit[0] + 1 ; i < arrLimit[lengthLim]; i++) {
+                this.folderItems[i].classList.add("selected");
+            }
+
+        }
+
+        __delete() {
+            for(let i = this.folderItems.length; i--;) {
+                this.folderItems[i].classList.remove("selected");
+            }
+        }
+
+        __mouseClick(elem) {
+
+            if(elem.classList.contains('selected')) {
+                this.__delete();
+                return;
+            }
+
+            this.__delete();
+
+            elem.classList.add("selected");
+        }
+
+        __ctrlClick(elem) {
+            elem.classList.toggle("selected");
+        }
+    }
+
+    const eventsFolder = new EventFolderItems('folders-root', 'folder-item__content', 'folder__icon');
+
+    eventsFolder.selectClick();
+    eventsFolder.toggleFolder();
+
+</script>
+</html>
