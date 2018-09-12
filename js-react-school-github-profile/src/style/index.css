@@ -1,0 +1,56 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/bootstrap/dist/css/bootstrap-grid.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #F3F4F4;
+}
+
+.user-profile {
+  -webkit-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.35);
+  background-color: #fff;
+}
+
+.user-avatar img{
+  max-width: 100%;
+}
+
+.user-info {
+  margin: 10px 0 15px 10px;
+}
+
+.user-info__name,
+.user-info__login {
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+
+.user-info__name {
+  font-size: 20px;
+}
+
+.user-info__login {
+  font-size: 20px;
+}
+
+.user-info__company,
+.user-info__location {
+  font-size: 16px;
+}
+
+
+.user-statistics {
+  margin-left: 10px;
+}
+
+.user-statistics span{
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
